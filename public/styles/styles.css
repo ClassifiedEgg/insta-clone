@@ -1,0 +1,42 @@
+body {
+    background: #ccffff;    
+}
+
+
+
+#follow {
+    width: 100%;
+}
+
+.galleryPhoto {
+    width: 30%;
+	float: left;
+	margin: 1.66%;
+}
+
+.mainWrapper {
+    margin: 3% 15%;
+}
+
+.wrapperTop {
+    display: grid;
+    grid-template-columns: 1fr 20px 3fr 1fr;
+}
+
+#userPic{
+    grid-column: 1 / 2 ;
+}
+
+#userInfo{
+    margin: auto 0;
+    grid-column: 3 / 4;
+}
+
+#userBtn{
+    margin: auto 0;
+    grid-column: 4 / 5;
+}
+
+.formTop {
+    text-align: center;
+}
