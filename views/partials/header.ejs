@@ -12,7 +12,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css">
-    <link rel="stylesheet" href="styles/styles.css">
+    <link rel="stylesheet" type="text/css" href="styles/styles.css">
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -41,7 +41,7 @@
                     <li class="nav-item"><a href="/login" class="nav-link">Login</a></li>
                     <li class="nav-item"><a href="/register" class="nav-link">Sign Up</a></li>
                     <% } else { %>
-                    <li class="nav-item"><a href="/users/<%= currentUser._id %>" class="nav-link">Hi,
+                    <li class="nav-item"><a href="/<%= currentUser._id %>" class="nav-link">Hi,
                             <%= currentUser.username %></a></li>
                     <li class="nav-item"><a href="/logout" class="nav-link">Logout</a></li>
                     <% } %>

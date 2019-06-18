@@ -3,6 +3,7 @@ var express = require("express"),
     mongoose = require("mongoose"),
     bodyParser = require("body-parser"),
     User = require("./models/user"),
+    Post = require("./models/post"),
     session = require("express-session"),
     passport = require("passport"),
     LocalStrategy = require("passport-local");
@@ -33,8 +34,9 @@ app.use((req, res, next) => {
 
 
 app.get("/", function (req, res) {
-    res.render("main");
+    res.render("landing");
 });
+
 
 app.get("/register", function (req, res) {
     res.render("signup");
@@ -87,6 +89,44 @@ app.get("/logout", function (req, res) {
     req.logout();
     res.redirect("/");
 });
+
+
+app.get("/:id", function (req, res) {
+    User.findById(req.params.id).populate("posts").exec(function (err, foundUser) {
+        if (err) {
+            console.log(err);
+        } else {
+            res.render("main", { user: foundUser });
+        }
+    });
+});
+
+app.post("/:id", function (req, res) {
+    User.findById(req.params.id, function (err, foundUser) {
+        if (err) {
+            console.log(err);
+        } else {
+            var newPost = new Post({
+                image: req.body.imageurl,
+                caption: req.body.caption
+            });
+            Post.create(newPost, function (err, madePost) {
+                madePost.author.id = req.user._id;
+                madePost.author.username = req.user.username;
+                madePost.save();
+                foundUser.posts.push(madePost);
+                foundUser.save();
+                res.redirect("/");
+            });
+        }
+    });
+});
+
+app.get("/:id/new", function (req, res) {
+    res.render("new");
+});
+
+
 
 app.listen(3000, process.env.IP, function () {
     console.log("The server has satrted");
