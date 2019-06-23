@@ -1,0 +1,36 @@
+<% include ../partials/header.ejs %>
+
+<div class="mainWrapper">
+    <h1 class="formTop">Edit User</h1>
+    <div class="container">
+        <form action="/<%= currentUser._id %>?_method=PUT" method="POST">
+            <div class="form-group">
+                <label for="username">User Name</label>
+                <input class="form-control" type="text" name="username" autocomplete="off"  value="<%= currentUser.username %>" readonly />
+            </div>
+            <div class="form-group">
+                <label for="firstName">First Name</label>
+                <input class="form-control" type="text" name="firstName" autocomplete="off" value="<%= currentUser.firstName %>" required />
+            </div>
+            <div class="form-group">
+                <label for="lastName">Last Name</label>
+                <input class="form-control" type="text" name="lastName" autocomplete="off"  value="<%= currentUser.lastName %>" required />
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input class="form-control" type="email" name="email" autocomplete="off"  value="<%= currentUser.email %>" required />
+            </div>
+            <div class="form-group">
+                <label for="avatar">Profile Photo</label>
+                <input class="form-control" type="text" name="avatar" placeholder="Avatar URL" autocomplete="off" value="<%= currentUser.avatar %>" />
+            </div>
+            <div class="form-group">
+                <button class="btn btn-md btn-primary btn-block">Confirm Changes</button>
+            </div>
+            <hr>
+            <a href="/<%= currentUser._id %>">Back</a>
+        </form>
+    </div>
+</div>
+
+<% include ../partials/footer.ejs %>

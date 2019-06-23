@@ -1,40 +1,84 @@
 body {
-    background: #ccffff;    
+  background: #ccffff;
+}
+
+.userPic {
+  max-width: 200px;
+  display: block;
+  height: auto;
 }
 
 #follow {
-    width: 100%;
+  width: 100%;
 }
 
 .galleryPhoto {
-    width: 30%;
-	float: left;
-	margin: 1.66%;
+  width: 30%;
+  float: left;
+  margin: 1.66%;
 }
 
 .mainWrapper {
-    margin: 3% 15%;
+  margin: 3% 15%;
 }
 
 .wrapperTop {
-    display: grid;
-    grid-template-columns: 1fr 20px 3fr 1fr;
+  display: grid;
+  grid-template-columns: 1fr 20px 3fr 1fr;
 }
 
-#userPic{
-    grid-column: 1 / 2 ;
+#userPic {
+  grid-column: 1 / 2;
 }
 
-#userInfo{
-    margin: auto 0;
-    grid-column: 3 / 4;
+#userInfo {
+  margin: auto 0;
+  grid-column: 3 / 4;
+  grid-template-rows: 1fr 2fr 2fr;
 }
 
-#userBtn{
-    margin: auto 0;
-    grid-column: 4 / 5;
+#userBtn {
+  margin: auto 0;
+  grid-column: 4 / 5;
 }
 
 .formTop {
-    text-align: center;
+  text-align: center;
+}
+
+#userName {
+  margin: auto 0;
+  grid-row: 1 / 2;
+}
+
+#userDetails {
+  margin: auto 0;
+  grid-row: 2 / 3;
+}
+
+#userBio {
+  margin: auto 0;
+  grid-row: 3 / 4;
+}
+
+.post {
+  display: grid;
+  grid-template-columns: 6fr 2fr;
+  border: 1px solid black;
+}
+
+.showPost {
+  grid-column: 1 / 2;
+  border: 1px solid bredlack;
+}
+
+#displayPost {
+  display: block;
+  margin: auto auto;
+  max-width: 100%;
+  max-height: auto;
+}
+
+.shotOther {
+  grid-column: 2 / 3;
 }

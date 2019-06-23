@@ -1,0 +1,23 @@
+<% include ../partials/header.ejs %>
+
+<div class="mainWrapper">
+    <div class="post">
+        <div class="showPost">
+            <img src="<%= post.image %>" alt="" id="displayPost">
+        </div>
+        <div class="showOther">
+            <form action="/<%= user._id %>/post/<%= post._id %>?_method=DELETE" method="POST">
+                <a href="/<%= user._id %>/post/<%= post._id %>/edit" class="btn btn-info">Edit</a>
+                <button class="btn btn-danger">Delete</button>
+            </form>
+            <div>
+                <%= post.author.username %>
+            </div>
+            <div>
+                <%= post.caption %>
+            </div>
+        </div>
+    </div>
+</div>
+
+<% include ../partials/footer.ejs %>
