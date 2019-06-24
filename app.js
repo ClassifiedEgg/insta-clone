@@ -173,8 +173,8 @@ app.get("/:id/post/:postid", function(req, res) {
 
 //========================= EDIT POST PAGE =========================
 app.get("/:id/post/:postid/edit", function(req, res) {
-  Post.findById(req.params.postid, function(err, foundPost){
-    res.render("post/edit", {post: foundPost});
+  Post.findById(req.params.postid, function(err, foundPost) {
+    res.render("post/edit", { post: foundPost });
   });
 });
 
@@ -196,9 +196,9 @@ app.put("/:id/post/:postid", function(req, res) {
 });
 
 //========================= DELETE POST PAGE =========================
-app.delete("/:id/post/:postid", function(req, res){
-  Post.findByIdAndRemove(req.params.postid, function(err){
-    if(err){
+app.delete("/:id/post/:postid", function(req, res) {
+  Post.findByIdAndRemove(req.params.postid, function(err) {
+    if (err) {
       console.log(err);
     } else {
       res.redirect("/" + req.params.id);
@@ -206,6 +206,28 @@ app.delete("/:id/post/:postid", function(req, res){
   });
 });
 
+//========================= MIDDLEWARE =========================
+function isLoggedIn(req, res, next) {
+  if (req.isAuthenticated()) {
+    next();
+  } else {
+    res.redirect("/login");
+  }
+}
+
+function isUserOwnerOfPost(req, res, next) {
+  if (req.isAuthenticated()) {
+    Post.findById(req.params.id, function(err, foundPost) {
+      if (foundPost.author.id.equals(req.user.id)) {
+        next();
+      } else {
+        res.redirect("back");
+      }
+    });
+  } else {
+    res.redirect("/login");
+  }
+}
 
 app.listen(3000, process.env.IP, function() {
   console.log("The server has started");
