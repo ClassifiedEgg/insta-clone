@@ -41,6 +41,7 @@ app.use((req, res, next) => {
 //========================= LANDING PAGE =========================
 app.get("/", function(req, res) {
   res.render("landing");
+  console.log(req.user);
 });
 
 //========================= SIGNUP PAGE =========================
@@ -102,7 +103,7 @@ app.get("/:id", function(req, res) {
 });
 
 //========================= NEW POST PAGE =========================
-app.post("/:id", function(req, res) {
+app.post("/:id", isUser, function(req, res) {
   User.findById(req.params.id, function(err, foundUser) {
     if (err) {
       console.log(err);
@@ -123,16 +124,22 @@ app.post("/:id", function(req, res) {
   });
 });
 
-app.get("/:id/new", function(req, res) {
+app.get("/:id/new", isLoggedIn, function(req, res) {
   res.render("post/new");
 });
 
 //========================= EDIT USER PAGE =========================
-app.get("/:id/edit", function(req, res) {
-  res.render("user/edit");
+app.get("/:id/edit", isUser, function(req, res) {
+  User.findById(req.params.id, function(err, foundUser) {
+    if (err) {
+      res.redirect("back");
+    } else {
+      res.render("user/edit", { user: foundUser });
+    }
+  });
 });
 
-app.put("/:id", function(req, res) {
+app.put("/:id", isUser, function(req, res) {
   var updatedUser = {
     username: req.body.username,
     firstName: req.body.firstName,
@@ -172,13 +179,13 @@ app.get("/:id/post/:postid", function(req, res) {
 });
 
 //========================= EDIT POST PAGE =========================
-app.get("/:id/post/:postid/edit", function(req, res) {
+app.get("/:id/post/:postid/edit", isUserOwnerOfPost, function(req, res) {
   Post.findById(req.params.postid, function(err, foundPost) {
     res.render("post/edit", { post: foundPost });
   });
 });
 
-app.put("/:id/post/:postid", function(req, res) {
+app.put("/:id/post/:postid", isUserOwnerOfPost, function(req, res) {
   var updatedPost = {
     caption: req.body.caption
   };
@@ -196,7 +203,7 @@ app.put("/:id/post/:postid", function(req, res) {
 });
 
 //========================= DELETE POST PAGE =========================
-app.delete("/:id/post/:postid", function(req, res) {
+app.delete("/:id/post/:postid", isUserOwnerOfPost, function(req, res) {
   Post.findByIdAndRemove(req.params.postid, function(err) {
     if (err) {
       console.log(err);
@@ -215,13 +222,35 @@ function isLoggedIn(req, res, next) {
   }
 }
 
+function isUser(req, res, next) {
+  if (req.isAuthenticated()) {
+    User.findById(req.params.id, function(err, foundUser) {
+      if (err) {
+        res.redirect("back");
+      } else {
+        if (foundUser._id.equals(req.user._id)) {
+          next();
+        } else {
+          res.redirect("back");
+        }
+      }
+    });
+  } else {
+    res.redirect("/login");
+  }
+}
+
 function isUserOwnerOfPost(req, res, next) {
   if (req.isAuthenticated()) {
-    Post.findById(req.params.id, function(err, foundPost) {
-      if (foundPost.author.id.equals(req.user.id)) {
-        next();
-      } else {
+    Post.findById(req.params.postid, function(err, foundPost) {
+      if (err) {
         res.redirect("back");
+      } else {
+        if (foundPost.author.id.equals(req.user._id)) {
+          next();
+        } else {
+          res.redirect("back");
+        }
       }
     });
   } else {

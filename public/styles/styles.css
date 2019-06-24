@@ -79,6 +79,6 @@ body {
   max-height: auto;
 }
 
-.shotOther {
+.showOther {
   grid-column: 2 / 3;
 }
