@@ -159,6 +159,19 @@ app.put("/:id", isUser, function(req, res) {
   });
 });
 
+//========================= LIKED POSTS PAGE =========================
+app.get("/:id/liked", isUser, function(req, res) {
+  User.findById(req.params.id)
+    .populate("likedPosts")
+    .exec(function(err, foundUser) {
+      if (err) {
+        console.log(err);
+      } else {
+        res.render("user/liked", { user: foundUser });
+      }
+    });
+});
+
 //========================= SHOW POST PAGE =========================
 app.get("/:id/post/:postid", function(req, res) {
   User.findById(req.params.id, function(err, foundUser) {
@@ -171,7 +184,12 @@ app.get("/:id/post/:postid", function(req, res) {
           console.log(err);
           res.redirect("back");
         } else {
-          res.render("post/show", { user: foundUser, post: foundPost });
+          var isPostLiked = foundUser.likedPosts.indexOf(foundPost._id);
+          res.render("post/show", {
+            user: foundUser,
+            post: foundPost,
+            isPostLiked: isPostLiked
+          });
         }
       });
     }
@@ -209,6 +227,48 @@ app.delete("/:id/post/:postid", isUserOwnerOfPost, function(req, res) {
       console.log(err);
     } else {
       res.redirect("/" + req.params.id);
+    }
+  });
+});
+
+//========================= LIKE POST ROUTE =========================
+app.post("/:id/post/:postid/like", function(req, res) {
+  User.findById(req.params.id, function(err, foundUser) {
+    if (err) {
+      console.log(err);
+    } else {
+      Post.findById(req.params.postid, function(err, foundPost) {
+        if (err) {
+          console.log(err);
+        } else {
+          foundPost.author.id = req.user._id;
+          foundPost.author.username = req.user.username;
+          foundPost.save();
+          foundUser.likedPosts.push(foundPost);
+          foundUser.save();
+          res.redirect("/" + foundUser._id + "/post/" + foundPost._id);
+        }
+      });
+    }
+  });
+});
+
+//========================= UNLIKE POST ROUTE =========================
+app.post("/:id/post/:postid/unlike", function(req, res) {
+  User.findById(req.params.id, function(err, foundUser) {
+    if (err) {
+      console.log(err);
+    } else {
+      Post.findById(req.params.postid, function(err, foundPost) {
+        if (err) {
+          console.log(err);
+        } else {
+          var isPostLiked = foundUser.likedPosts.indexOf(foundPost._id);
+          foundUser.likedPosts.splice(isPostLiked, 1);
+          foundUser.save();
+          res.redirect("/" + foundUser._id + "/post/" + foundPost._id);
+        }
+      });
     }
   });
 });

@@ -2,12 +2,14 @@
 
 <div class="mainWrapper">
     <div class="wrapperTop">
-        <div>
+        <div id="userPicFrame">
             <img src="<%= user.avatar %>" alt="" id="userPic" class="img-fluid">
         </div>
         <div class="" id="userInfo">
-            <p class="row" id="userName">Name</p>
-            <p class="row" id="userDetails">Posts Followers Following</p>
+            <p class="row" id="userName"><strong><%= user.username %></strong> </p>
+            <p class="row" id="userDetails"><span class="">Posts <%= user.posts.length %></span> <span
+                    class="">Followers
+                    <%= user.posts.length %></span> <span class="">Following <%= user.posts.length %></span></p>
             <p class="row" id="userBio">Bio</p>
         </div>
         <% if (currentUser) { %>

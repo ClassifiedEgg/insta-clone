@@ -27,14 +27,20 @@ body {
   grid-template-columns: 1fr 20px 3fr 1fr;
 }
 
-#userPic {
+#userPicFrame {
   grid-column: 1 / 2;
 }
 
+#userPic {
+  width: 190px;
+  height: 190px;
+  margin: auto;
+}
+
 #userInfo {
-  margin: auto 0;
+  display: grid;
   grid-column: 3 / 4;
-  grid-template-rows: 1fr 2fr 2fr;
+  grid-template-rows: 2fr 2fr 2fr;
 }
 
 #userBtn {
@@ -54,6 +60,10 @@ body {
 #userDetails {
   margin: auto 0;
   grid-row: 2 / 3;
+}
+
+#userDetails span {
+  margin-right: 10%;
 }
 
 #userBio {
@@ -81,4 +91,8 @@ body {
 
 .showOther {
   grid-column: 2 / 3;
+}
+
+.dropdown-toggle::after {
+  display: none;
 }

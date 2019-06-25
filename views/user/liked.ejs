@@ -1,0 +1,15 @@
+<% include ../partials/header.ejs %>
+
+<h1 class="">Liked Posts</h1>
+
+<div class="mainWrapper">
+
+    <% user.likedPosts.forEach(function(post){ %>
+    <div class="gallery">
+        <a href="/<%= post.author.id %>/post/<%= post._id %>"><img src="<%= post.image %>" alt="" class="galleryPhoto"></a>
+    </div>
+    <%}) %>
+
+</div>
+
+<% include ../partials/footer.ejs %>

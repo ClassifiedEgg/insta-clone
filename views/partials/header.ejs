@@ -44,25 +44,31 @@
 
                 <div class="d-flex">
                     <form class="form-inline flex-nowrap my-2 my-lg-0 mx-auto">
-                        <input class="form-control mr-sm-2" type="search" name="search" placeholder="Search" aria-label="Search">
+                        <input class="form-control mr-sm-2" type="search" name="search" placeholder="Search"
+                            aria-label="Search">
                         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                     </form>
                 </div>
 
                 <div class="flex-nowrap">
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="nav navbar-nav ml-auto">
-                            <% if (!currentUser) { %>
-                            <li class="nav-item"><a href="/login" class="nav-link">Login</a></li>
-                            <li class="nav-item"><a href="/register" class="nav-link">Sign Up</a></li>
-                            <% } else { %>
-                            <li class="nav-item"><a href="/<%= currentUser._id %>" class="nav-link">Hi,
-                                    <%= currentUser.username %></a></li>
-                            <li class="nav-item"><a href="/<%= currentUser._id %>/edit" class="nav-link">Edit</a></li>
-                            <li class="nav-item"><a href="/logout" class="nav-link">Logout</a></li>
-                            <% } %>
-                        </ul>
-                    </div>
+                    <ul class="nav ml-auto">
+                        <% if (!currentUser) { %>
+                        <li class="nav-item"><a href="/login" class="nav-link text-light">Login</a></li>
+                        <li class="nav-item"><a href="/register" class="nav-link text-light">Sign Up</a></li>
+                        <% } else { %>
+                            <li class="nav-item"><a href="/<%= currentUser._id %>/new   " class="nav-link text-light">Add Post</a></li>
+                        <li class="nav dropdown">
+                            <a class="nav-link dropdown-toggle text-light" data-toggle="dropdown" href="#" role="button"
+                                aria-haspopup="true" aria-expanded="false">User</a>
+                            <div class="dropdown-menu">
+                                <a href="/<%= currentUser._id %>" class="nav-link text-dark">Home</a>
+                                <a href="/<%= currentUser._id %>/edit" class="nav-link text-dark">Edit Account</a>
+                                <a href="/<%= currentUser._id %>/liked" class="nav-link text-dark">Liked Posts</a>
+                            </div>
+                        </li>
+                        <li class="nav-item"><a href="/logout" class="nav-link text-light">Logout</a></li>
+                        <% } %>
+                    </ul>
                 </div>
 
             </div>

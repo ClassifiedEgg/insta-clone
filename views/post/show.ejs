@@ -10,6 +10,17 @@
                 <a href="/<%= user._id %>/post/<%= post._id %>/edit" class="btn btn-info">Edit</a>
                 <button class="btn btn-danger">Delete</button>
             </form>
+            
+            <%  if(isPostLiked === -1){ %> 
+            <form action="/<%= user._id %>/post/<%= post._id %>/like" method="POST" id="likeBtn">
+                <button class="btn btn-secondary">Like</button>
+            </form>
+            <% } else { %>
+            <form action="/<%= user._id %>/post/<%= post._id %>/unlike" method="POST" id="unlikeBtn">
+                <button class="btn btn-secondary">Unlike</button>
+            </form>
+            <% } %>
+
             <div>
                 <%= post.author.username %>
             </div>
