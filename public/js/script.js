@@ -7,7 +7,6 @@ $(document).ready(function() {
       $(this).attr("/:id/post/:postid/like"),
       $(this).serialize(),
       function(response) {
-        // do something here on success
       },
       "json"
     );
@@ -20,7 +19,6 @@ $(document).ready(function() {
       $(this).attr("/:id/post/:postid/unlike"),
       $(this).serialize(),
       function(response) {
-        // do something here on success
       },
       "json"
     );

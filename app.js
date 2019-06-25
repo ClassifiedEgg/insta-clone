@@ -4,11 +4,11 @@ var express = require("express"),
   bodyParser = require("body-parser"),
   User = require("./models/user"),
   Post = require("./models/post"),
+  Comment = require("./models/comment"),
   session = require("express-session"),
   passport = require("passport"),
   methodOverride = require("method-override"),
-  LocalStrategy = require("passport-local"),
-  isImageUrl = require("is-image-url");
+  LocalStrategy = require("passport-local");
 
 mongoose.connect("mongodb://localhost:27017/instaclone", {
   useNewUrlParser: true
@@ -179,19 +179,21 @@ app.get("/:id/post/:postid", function(req, res) {
       console.log(err);
       res.redirect("back");
     } else {
-      Post.findById(req.params.postid, function(err, foundPost) {
-        if (err) {
-          console.log(err);
-          res.redirect("back");
-        } else {
-          var isPostLiked = foundUser.likedPosts.indexOf(foundPost._id);
-          res.render("post/show", {
-            user: foundUser,
-            post: foundPost,
-            isPostLiked: isPostLiked
-          });
-        }
-      });
+      Post.findById(req.params.postid)
+        .populate("comments")
+        .exec(function(err, foundPost) {
+          if (err) {
+            console.log(err);
+            res.redirect("back");
+          } else {
+            var isPostLiked = foundUser.likedPosts.indexOf(foundPost._id);
+            res.render("post/show", {
+              user: foundUser,
+              post: foundPost,
+              isPostLiked: isPostLiked
+            });
+          }
+        });
     }
   });
 });
@@ -232,7 +234,7 @@ app.delete("/:id/post/:postid", isUserOwnerOfPost, function(req, res) {
 });
 
 //========================= LIKE POST ROUTE =========================
-app.post("/:id/post/:postid/like", function(req, res) {
+app.post("/:id/post/:postid/like", isUser, function(req, res) {
   User.findById(req.params.id, function(err, foundUser) {
     if (err) {
       console.log(err);
@@ -254,7 +256,7 @@ app.post("/:id/post/:postid/like", function(req, res) {
 });
 
 //========================= UNLIKE POST ROUTE =========================
-app.post("/:id/post/:postid/unlike", function(req, res) {
+app.post("/:id/post/:postid/unlike", isUser, function(req, res) {
   User.findById(req.params.id, function(err, foundUser) {
     if (err) {
       console.log(err);
@@ -269,6 +271,98 @@ app.post("/:id/post/:postid/unlike", function(req, res) {
           res.redirect("/" + foundUser._id + "/post/" + foundPost._id);
         }
       });
+    }
+  });
+});
+
+//========================= NEW COMMENT PAGE =========================
+app.get("/:id/post/:postid/comment/new", isLoggedIn, function(req, res) {
+  Post.findById(req.params.postid, function(err, foundPost) {
+    if (err) {
+      res.redirect("back");
+    } else {
+      res.render("comment/new", { post: foundPost });
+    }
+  });
+});
+
+app.post("/:id/post/:postid/comment", isLoggedIn, function(req, res) {
+  Post.findById(req.params.postid, function(err, foundPost) {
+    if (err) {
+      res.redirect("back");
+    } else {
+      var newComment = new Comment({
+        text: req.body.text
+      });
+      Comment.create(newComment, function(err, madeComment) {
+        if (err) {
+          res.redirect("back");
+        } else {
+          madeComment.author.id = req.user._id;
+          madeComment.author.username = req.user.username;
+          madeComment.save();
+          foundPost.comments.push(madeComment);
+          foundPost.save();
+          res.redirect("/" + req.params.id + "/post/" + foundPost._id);
+        }
+      });
+    }
+  });
+});
+
+//========================= EDIT COMMENT PAGE =========================
+app.get("/:id/post/:postid/comment/:commentid/edit", isLoggedIn, function(
+  req,
+  res
+) {
+  Post.findById(req.params.postid, function(err, foundPost) {
+    if (err) {
+      res.redirect("back");
+    } else {
+      Comment.findById(req.params.commentid, function(err, foundComment) {
+        if (err) {
+          res.redirect("back");
+        } else {
+          res.render("comment/edit", {
+            post: foundPost,
+            comment: foundComment
+          });
+        }
+      });
+    }
+  });
+});
+
+app.put("/:id/post/:postid/comment/:commentid", isLoggedIn, function(req, res) {
+  var updatedComment = {
+    text: req.body.text
+  };
+  Post.findById(req.params.postid, function(err, foundPost) {
+    if (err) {
+      res.redirect("back");
+    } else {
+      Comment.findByIdAndUpdate(
+        req.params.commentid,
+        { $set: updatedComment },
+        function(err, madeComment) {
+          if (err) {
+            res.redirect("back");
+          } else {
+            res.redirect("/" + req.params.id + "/post/" + foundPost._id);
+          }
+        }
+      );
+    }
+  });
+});
+
+//========================= DELETE POST PAGE =========================
+app.delete("/:id/post/:postid/comment/:commentid/delete", function(req, res) {
+  Comment.findByIdAndRemove(req.params.commentid, function(err){
+    if(err){
+      console.log(err)
+    } else {
+      res.redirect("/" + req.params.id + "/post/" + req.params.postid);
     }
   });
 });
@@ -307,6 +401,24 @@ function isUserOwnerOfPost(req, res, next) {
         res.redirect("back");
       } else {
         if (foundPost.author.id.equals(req.user._id)) {
+          next();
+        } else {
+          res.redirect("back");
+        }
+      }
+    });
+  } else {
+    res.redirect("/login");
+  }
+}
+
+function isUserOwnerOfComment(req, res, next) {
+  if (req.isAuthenticated()) {
+    Comment.findById(req.params.commentid, function(err, fountComment) {
+      if (err) {
+        res.redirect("back");
+      } else {
+        if (fountComment.author.id.equals(req.user._id)) {
           next();
         } else {
           res.redirect("back");
