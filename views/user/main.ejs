@@ -6,21 +6,34 @@
             <img src="<%= user.avatar %>" alt="" id="userPic" class="img-fluid">
         </div>
         <div class="" id="userInfo">
-            <p class="row" id="userName"><strong><%= user.username %></strong> </p>
+            <div id="userNameAndFollow">
+                <p class="row" id="userName"><strong><%= user.username %></strong></p>
+                <!-- <% if (currentUser && !user._id.equals(currentUser._id)) { %>
+                <form action="/<%= user._id %>/follow" method="POST" class="form-inline" id="userFollow">
+                    <button class="btn btn-primary btn-sm" id="followBtn">Follow <strong>+</strong></button>
+                </form>
+                <%} %> -->
+
+                <%  if(isUserFollowed === -1){ %>
+                <form action="/<%= user._id %>/follow" method="POST" class="form-inline" id="userFollow">
+                    <button class="btn btn-primary btn-sm" id="followBtn">Follow <strong>+</strong></button>
+                </form>
+                <% } else { %>
+                <form action="/<%= user._id %>/unfollow" method="POST" class="form-inline" id="userFollow">
+                    <button class="btn btn-primary btn-sm" id="followBtn">Unfollow</button>
+                </form>
+                <% } %>
+            </div>
+
             <p class="row" id="userDetails"><span class="">Posts <%= user.posts.length %></span> <span
                     class="">Followers
-                    <%= user.posts.length %></span> <span class="">Following <%= user.posts.length %></span></p>
+                    <%= user.posts.length %></span> <span class="">Following <%= user.posts.length %></span>
+            </p>
+
             <p class="row" id="userBio">Bio</p>
+
         </div>
-        <% if (currentUser) { %>
-        <div class="" id="userBtn">
-            <% if (user._id.equals(currentUser._id)) { %>
-            <a href="/<%= user._id %>/new"><i class="fas fa-plus fa-7x"></i></a>
-            <%} else { %>
-            <a href="#" class="btn btn-primary" style="width: 100%;">Follow</a>
-            <%} %>
-        </div>
-        <%} %>
+
     </div>
     <hr>
     <% user.posts.forEach(function(post){ %>

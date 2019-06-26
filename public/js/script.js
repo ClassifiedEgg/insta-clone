@@ -14,9 +14,21 @@ $(document).ready(function() {
   });
   
   var $unlikeBtn = $("#unlikeBtn");
-  $unlike.submit(function() {
+  $unlikeBtn.submit(function() {
     $.post(
       $(this).attr("/:id/post/:postid/unlike"),
+      $(this).serialize(),
+      function(response) {
+      },
+      "json"
+    );
+    return false;
+  });
+  
+  var $followBtn = $("#followBtn");
+  $followBtn.submit(function() {
+    $.post(
+      $(this).attr("/:id/follow"),
       $(this).serialize(),
       function(response) {
       },

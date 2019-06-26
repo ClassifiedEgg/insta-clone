@@ -97,7 +97,11 @@ app.get("/:id", function(req, res) {
       if (err) {
         console.log(err);
       } else {
-        res.render("user/main", { user: foundUser });
+        var isUserFollowed = req.user.following.indexOf(req.params.id);
+        res.render("user/main", {
+          user: foundUser,
+          isUserFollowed: isUserFollowed
+        });
       }
     });
 });
@@ -160,7 +164,7 @@ app.put("/:id", isUser, function(req, res) {
 });
 
 //========================= LIKED POSTS PAGE =========================
-app.get("/:id/liked", isUser, function(req, res) {
+app.get("/:id/liked", isLoggedIn, function(req, res) {
   User.findById(req.params.id)
     .populate("likedPosts")
     .exec(function(err, foundUser) {
@@ -234,8 +238,8 @@ app.delete("/:id/post/:postid", isUserOwnerOfPost, function(req, res) {
 });
 
 //========================= LIKE POST ROUTE =========================
-app.post("/:id/post/:postid/like", isUser, function(req, res) {
-  User.findById(req.params.id, function(err, foundUser) {
+app.post("/:id/post/:postid/like", isLoggedIn, function(req, res) {
+  User.findById(req.user.id, function(err, foundUser) {
     if (err) {
       console.log(err);
     } else {
@@ -243,9 +247,6 @@ app.post("/:id/post/:postid/like", isUser, function(req, res) {
         if (err) {
           console.log(err);
         } else {
-          foundPost.author.id = req.user._id;
-          foundPost.author.username = req.user.username;
-          foundPost.save();
           foundUser.likedPosts.push(foundPost);
           foundUser.save();
           res.redirect("/" + foundUser._id + "/post/" + foundPost._id);
@@ -256,8 +257,8 @@ app.post("/:id/post/:postid/like", isUser, function(req, res) {
 });
 
 //========================= UNLIKE POST ROUTE =========================
-app.post("/:id/post/:postid/unlike", isUser, function(req, res) {
-  User.findById(req.params.id, function(err, foundUser) {
+app.post("/:id/post/:postid/unlike", isLoggedIn, function(req, res) {
+  User.findById(req.user.id, function(err, foundUser) {
     if (err) {
       console.log(err);
     } else {
@@ -358,11 +359,43 @@ app.put("/:id/post/:postid/comment/:commentid", isLoggedIn, function(req, res) {
 
 //========================= DELETE POST PAGE =========================
 app.delete("/:id/post/:postid/comment/:commentid/delete", function(req, res) {
-  Comment.findByIdAndRemove(req.params.commentid, function(err){
-    if(err){
-      console.log(err)
+  Comment.findByIdAndRemove(req.params.commentid, function(err) {
+    if (err) {
+      console.log(err);
     } else {
       res.redirect("/" + req.params.id + "/post/" + req.params.postid);
+    }
+  });
+});
+
+//========================= FOLLOW USER ROUTE =========================
+app.post("/:id/follow", isLoggedIn, function(req, res) {
+  User.findById(req.params.id, function(err, foundUser) {
+    if (err) {
+      console.log(err);
+      res.redirect("back");
+    } else {
+      req.user.following.push(foundUser);
+      foundUser.followers.push(req.user);
+      req.user.save();
+      foundUser.save();
+      res.redirect("/" + foundUser._id);
+    }
+  });
+});
+
+app.post("/:id/unfollow", isLoggedIn, function(req, res) {
+  User.findById(req.params.id, function(err, foundUser) {
+    if (err) {
+      res.redirect("back");
+    } else {
+      var isUserFollowed = req.user.following.indexOf(req.params.id);
+      var isUserFollowing = req.user.following.indexOf(req.params.id);
+      foundUser.followers.splice(isUserFollowing, 1);
+      foundUser.save();
+      req.user.following.splice(isUserFollowed, 1);
+      req.user.save();
+      res.redirect("/" + foundUser._id);
     }
   });
 });

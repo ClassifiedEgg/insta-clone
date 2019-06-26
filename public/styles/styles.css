@@ -52,9 +52,26 @@ body {
   text-align: center;
 }
 
+#userNameAndFollow {
+  grid-row: 1 / 2;
+  display: grid;
+  grid-template-columns: 2fr 5fr;
+}
+
 #userName {
   margin: auto 0;
-  grid-row: 1 / 2;
+  align-items : center;
+  grid-column: 1 / 2;
+}
+
+#userFollow {
+  display: inline;
+  margin: auto 0;
+  grid-column: 2 / 3;
+}
+
+#followBtn {
+  display: inline;
 }
 
 #userDetails {
@@ -63,7 +80,7 @@ body {
 }
 
 #userDetails span {
-  margin-right: 10%;
+  margin-right: 5%;
 }
 
 #userBio {
