@@ -16,6 +16,7 @@ Works as an image sharing website similar to to Instagram (doesn't have any of t
 * Passport Local
 * Passport Local Mongoose
 * EJS
+* ~Is Image URL~
 
 ## Techonologies Learnt/Used
 * HTML
