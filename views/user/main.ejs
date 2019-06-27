@@ -8,12 +8,8 @@
         <div class="" id="userInfo">
             <div id="userNameAndFollow">
                 <p class="row" id="userName"><strong><%= user.username %></strong></p>
-                <!-- <% if (currentUser && !user._id.equals(currentUser._id)) { %>
-                <form action="/<%= user._id %>/follow" method="POST" class="form-inline" id="userFollow">
-                    <button class="btn btn-primary btn-sm" id="followBtn">Follow <strong>+</strong></button>
-                </form>
-                <%} %> -->
-
+                
+                <%  if(!user._id.equals(currentUser._id)){ %>
                 <%  if(isUserFollowed === -1){ %>
                 <form action="/<%= user._id %>/follow" method="POST" class="form-inline" id="userFollow">
                     <button class="btn btn-primary btn-sm" id="followBtn">Follow <strong>+</strong></button>
@@ -23,11 +19,12 @@
                     <button class="btn btn-primary btn-sm" id="followBtn">Unfollow</button>
                 </form>
                 <% } %>
+                <% } %>
             </div>
 
             <p class="row" id="userDetails"><span class="">Posts <%= user.posts.length %></span> <span
                     class="">Followers
-                    <%= user.posts.length %></span> <span class="">Following <%= user.posts.length %></span>
+                    <%= user.followers.length %></span> <span class="">Following <%= user.following.length %></span>
             </p>
 
             <p class="row" id="userBio">Bio</p>

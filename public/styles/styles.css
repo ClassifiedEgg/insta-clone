@@ -113,3 +113,49 @@ body {
 .dropdown-toggle::after {
   display: none;
 }
+
+.posts {
+  margin: auto;
+  max-width: 75%;
+}
+
+.postContainer {
+  margin: 2% 0;
+  border: 1px solid rgb(192, 192, 192);
+  border-radius: .7%;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+  background: white;
+}
+
+.postTop {
+  height: 40px;
+  width: 100%;
+  background: #ccffff;
+}
+
+.postTop p {
+  margin-left: 1%;
+}
+
+.postImageContainer {
+  max-width: 100%;
+  height: auto;
+}
+
+.postImage {
+  max-width: 100%;
+  height: auto;
+}
+
+.postCaption {
+  max-height: 100px;
+  width: 100%;
+  background: #ccffff;
+}
+
+.postCaption p {  
+  margin-left: 1%;
+}

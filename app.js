@@ -39,9 +39,16 @@ app.use((req, res, next) => {
 });
 
 //========================= LANDING PAGE =========================
-app.get("/", function(req, res) {
-  res.render("landing");
-  console.log(req.user);
+app.get("/", isLoggedIn, function(req, res) {
+  User.findById(req.user.id)
+    .populate({ path: "following", populate: { path: "posts" } })
+    .exec(function(err, foundUser) {
+      if (err) {
+        console.log(err);
+      } else {
+        res.render("landing", { user: foundUser });
+      }
+    });
 });
 
 //========================= SIGNUP PAGE =========================
