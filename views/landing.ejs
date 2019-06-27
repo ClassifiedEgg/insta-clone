@@ -10,15 +10,19 @@
         <div class="postContainer">
 
             <div class="postTop">
-                <p><%= user.username %></p>
+                <div class="userPicFrameLanding">
+                    <img src="<%= user.avatar %>" alt="" class="userPicLanding" class="img-fluid">
+                </div>
+                <p class="userNameLanding"><%= user.username %></p>
             </div>
 
             <div class="postImageContainer">
-                <a href="/<%= post.author.id %>/post/<%= post._id %>"><img src="<%= post.image %>" alt="" class="postImage"></a>
+                <a href="/<%= post.author.id %>/post/<%= post._id %>"><img src="<%= post.image %>" alt=""
+                        class="postImage"></a>
             </div>
 
             <div class="postCaption">
-                <p><%= post.caption %></p>
+                <p><span><%= user.username %></span> <%= post.caption %></p>
             </div>
 
         </div>

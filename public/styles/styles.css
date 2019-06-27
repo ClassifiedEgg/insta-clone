@@ -1,51 +1,70 @@
 body {
-  background: #ccffff;
+  background: #F6F4F3;
 }
 
-.userPic {
-  max-width: 200px;
-  display: block;
-  height: auto;
+.mainWrapper {
+  margin: 5% 15%;
 }
 
 #follow {
   width: 100%;
 }
 
-.galleryPhoto {
-  width: 30%;
+.galleryPhotoContainer {
+  width: 318px;
   float: left;
   margin: 1.66%;
+  height: 318px;
+  overflow: hidden;
+  background: #F6F4F3;
+  display: flex;
+  justify-items: center;
+  align-items: center;
 }
 
-.mainWrapper {
-  margin: 3% 15%;
+.galleryPhotoContainer a img{
+  height: 100%;
+  width: 100%;
 }
 
-.wrapperTop {
+.galleryPhoto {
+  max-width: 100%;
+  height: auto;
+  object-fit: fill;
+}
+
+.wrapperTopUserPage {
   display: grid;
-  grid-template-columns: 1fr 20px 3fr 1fr;
+  grid-template-columns: 1fr 3fr 1fr;
+  margin: 2% 5%;
 }
 
 #userPicFrame {
   grid-column: 1 / 2;
+  width: 100%;
+  height: 150px;
+  display: flex;
+  justify-items: center;
+  align-items: center;
+  margin: auto;
+  overflow: hidden;
 }
 
 #userPic {
-  width: 190px;
-  height: 190px;
-  margin: auto;
+  width: 100%;
+  height: auto;
 }
 
 #userInfo {
   display: grid;
-  grid-column: 3 / 4;
+  grid-column: 2 / 3;
   grid-template-rows: 2fr 2fr 2fr;
+  margin-left: 7%;
 }
 
 #userBtn {
   margin: auto 0;
-  grid-column: 4 / 5;
+  grid-column: 3 / 4;
 }
 
 .formTop {
@@ -116,7 +135,7 @@ body {
 
 .posts {
   margin: auto;
-  max-width: 75%;
+  max-width: 65%;
 }
 
 .postContainer {
@@ -127,13 +146,15 @@ body {
   flex-flow: column;
   align-items: center;
   justify-content: center;
-  background: white;
+  background: #F6F4F3;
 }
 
 .postTop {
-  height: 40px;
+  height: 50px;
   width: 100%;
-  background: #ccffff;
+  background: #AAEFDF;
+  display: grid;
+  grid-template-columns: 10% 80%;
 }
 
 .postTop p {
@@ -153,9 +174,50 @@ body {
 .postCaption {
   max-height: 100px;
   width: 100%;
-  background: #ccffff;
+  background: #AAEFDF;
 }
 
 .postCaption p {  
   margin-left: 1%;
+  margin-top: 3px;
 }
+
+.userPicFrameLanding {
+  grid-column: 1 / 2;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-items: center;
+  align-items: center;
+  margin: auto;
+  overflow: hidden;
+}
+
+.userPicLanding {
+  width: 100%;
+  height: auto;
+}
+
+.userNameLanding {
+  grid-column: 2 / 3;
+  margin: auto;
+  font-weight: 600;
+}
+
+.postCaption p span {
+  font-weight: 600;
+}
+
+.nav-item .nav-link {
+  height: 100%;
+  display: flex;
+  justify-items: center;
+  align-items: center;
+}
+
+.nav-link span i{
+  width: 27px;
+  padding-right: 5px;
+  border-right: 1px solid black;
+}
+

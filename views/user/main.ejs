@@ -1,14 +1,14 @@
 <% include ../partials/header.ejs %>
 
 <div class="mainWrapper">
-    <div class="wrapperTop">
+    <div class="wrapperTopUserPage">
         <div id="userPicFrame">
-            <img src="<%= user.avatar %>" alt="" id="userPic" class="img-fluid">
+            <img src="<%= user.avatar %>" alt="" id="userPic" class="">
         </div>
         <div class="" id="userInfo">
             <div id="userNameAndFollow">
                 <p class="row" id="userName"><strong><%= user.username %></strong></p>
-                
+
                 <%  if(!user._id.equals(currentUser._id)){ %>
                 <%  if(isUserFollowed === -1){ %>
                 <form action="/<%= user._id %>/follow" method="POST" class="form-inline" id="userFollow">
@@ -33,11 +33,14 @@
 
     </div>
     <hr>
-    <% user.posts.forEach(function(post){ %>
     <div class="gallery">
-        <a href="/<%= user._id %>/post/<%= post._id %>"><img src="<%= post.image %>" alt="" class="galleryPhoto"></a>
+            <% user.posts.forEach(function(post){ %>
+        <div class="galleryPhotoContainer"><a href="/<%= user._id %>/post/<%= post._id %>"><img src="<%= post.image %>"
+                    alt="" class="galleryPhoto"></a>
+        </div>
+        <%}) %>
     </div>
-    <%}) %>
+   
 </div>
 
 <% include ../partials/footer.ejs %>
