@@ -53,7 +53,7 @@
                 <div class="flex-nowrap">
                     <ul class="nav ml-auto">
                         <% if (!currentUser) { %>
-                        <li class="nav-item"><a href="/login" class="nav-link text-light"><i class="fas fa-sign-in-alt fa-lg"></i></a></li>
+                        <li class="nav-item"><a href="/login" class="nav-link text-light" name="login"><i class="fas fa-sign-in-alt fa-lg"></i></a></li>
                         <li class="nav-item"><a href="/register" class="nav-link text-light"><i class="fas fa-user-plus fa-lg"></i></a></li>
                         <% } else { %>
                         <li class="nav-item"><a href="/<%= currentUser._id %>/new   " class="nav-link text-light"><i

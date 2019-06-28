@@ -104,11 +104,20 @@ app.get("/:id", function(req, res) {
       if (err) {
         console.log(err);
       } else {
-        var isUserFollowed = req.user.following.indexOf(req.params.id);
-        res.render("user/main", {
-          user: foundUser,
-          isUserFollowed: isUserFollowed
-        });
+        console.log(req.user + "=============");
+        if (req.user) {
+          var isUserFollowed = req.user.following.indexOf(req.params.id);
+          console.log(req.body.user);
+          res.render("user/main", {
+            user: foundUser,
+            isUserFollowed: isUserFollowed
+          });
+        } else {
+          res.render("user/main", {
+            user: foundUser,
+            isUserFollowed: -1
+          });
+        }
       }
     });
 });

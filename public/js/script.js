@@ -37,5 +37,8 @@ $(document).ready(function() {
     return false;
   });
 
+  document.querySelector(".showCommentArea").addEventListener("click", function(){
+    document.querySelector(".addCommentArea").style.display = "block";
+  });
 
 });

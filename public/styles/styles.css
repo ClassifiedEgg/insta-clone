@@ -1,5 +1,5 @@
 body {
-  background: #F6F4F3;
+  background: #f6f4f3;
 }
 
 .mainWrapper {
@@ -16,13 +16,13 @@ body {
   margin: 1.66%;
   height: 318px;
   overflow: hidden;
-  background: #F6F4F3;
+  background: #f6f4f3;
   display: flex;
   justify-items: center;
   align-items: center;
 }
 
-.galleryPhotoContainer a img{
+.galleryPhotoContainer a img {
   height: 100%;
   width: 100%;
 }
@@ -79,7 +79,7 @@ body {
 
 #userName {
   margin: auto 0;
-  align-items : center;
+  align-items: center;
   grid-column: 1 / 2;
 }
 
@@ -127,6 +127,9 @@ body {
 
 .showOther {
   grid-column: 2 / 3;
+  margin-left: 1%;
+  display: grid;
+  grid-template-rows: 20% 60% 20%;
 }
 
 .dropdown-toggle::after {
@@ -141,18 +144,18 @@ body {
 .postContainer {
   margin: 2% 0;
   border: 1px solid rgb(192, 192, 192);
-  border-radius: .7%;
+  border-radius: 0.7%;
   display: flex;
   flex-flow: column;
   align-items: center;
   justify-content: center;
-  background: #F6F4F3;
+  background: #f6f4f3;
 }
 
 .postTop {
   height: 50px;
   width: 100%;
-  background: #AAEFDF;
+  background: #aaefdf;
   display: grid;
   grid-template-columns: 10% 80%;
 }
@@ -174,10 +177,10 @@ body {
 .postCaption {
   max-height: 100px;
   width: 100%;
-  background: #AAEFDF;
+  background: #aaefdf;
 }
 
-.postCaption p {  
+.postCaption p {
   margin-left: 1%;
   margin-top: 3px;
 }
@@ -215,9 +218,98 @@ body {
   align-items: center;
 }
 
-.nav-link span i{
+.nav-link span i {
   width: 27px;
   padding-right: 5px;
   border-right: 1px solid black;
 }
 
+.deletePostForm {
+  display: flex;
+  justify-content: space-around;
+}
+
+.showPostInfo {
+  margin: 0 2px;
+}
+
+.showPostInfo p {
+  margin-bottom: 5px;
+}
+
+.showComments {
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+  margin: 0 2px;
+}
+
+.showEachCommentTop {
+  display: grid;
+  grid-template-columns: 30% 70%;
+}
+
+.editCommentForm button {
+  border: none;
+  background: none;
+  display: none;
+  color: gray;
+}
+.showEachComment:hover button {
+  border: none;
+  background: none;
+  display: initial;
+}
+
+.editCommentForm button:hover {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.editCommentForm a {
+  border: none;
+  background: none;
+  display: none;
+  color: gray;
+}
+.showEachComment:hover a {
+  border: none;
+  background: none;
+  display: initial;
+}
+
+.editCommentForm a:hover {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.showReactionBtn {
+  margin-right: 2px;
+  margin-top: 1%;
+}
+
+.showReactionBtn form button{
+  color: red;
+}
+
+.showReactionBtn form a{
+  color: black;
+}
+
+.showReactionBtn button{
+  border: none;
+  background: none;
+}
+
+.showReactionBtn button:hover {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.addCommentArea {
+  display: none;
+}
+
+.showCommentArea {
+  text-decoration: none;
+  cursor: pointer;
+}

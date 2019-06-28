@@ -7,45 +7,61 @@
         </div>
         <div class="showOther">
 
-            <div>
-                <p style="margin: 2px 0;"><%= post.author.username %></p>
-                <p style="margin: 2px 0;"><%= post.caption %></p>
+            <div class="showPostInfo">
+                <p><strong><%= post.author.username %></strong></p>
+                <p><strong style="margin-right: 5px;"><%= post.author.username %></strong><%= post.caption %></p>
+                <% if(currentUser && currentUser._id.equals(post.author.id)){ %>
+                <form action="/<%= user._id %>/post/<%= post._id %>?_method=DELETE" method="POST"
+                    class="deletePostForm">
+                    <a href="/<%= user._id %>/post/<%= post._id %>/edit" class="btn btn-secondary">Edit <i
+                            class="fas fa-edit"></i></a>
+                    <button class="btn btn-danger">Delete <i class="fas fa-trash-alt"></i></button>
+                </form>
+                <% } %>
             </div>
 
-            <% if(currentUser && currentUser._id.equals(post.author.id)){ %>
-            <form action="/<%= user._id %>/post/<%= post._id %>?_method=DELETE" method="POST">
-                <a href="/<%= user._id %>/post/<%= post._id %>/edit" class="btn btn-info">Edit</a>
-                <button class="btn btn-danger">Delete</button>
-            </form>
-            <% } %>
+            <div class="showComments" style="max-height: 100%;">
+                <% post.comments.forEach(function(comment){ %>
+                <div class="showEachComment">
+                    <div class="showEachCommentTop">
+                        <p style="margin-bottom: 2px;"><strong><%= comment.author.username %></strong></p>
+                        <% if(currentUser && currentUser._id.equals(comment.author.id)){ %>
+                        <form
+                            action="/<%= user._id %>/post/<%= post._id %>/comment/<%= comment._id %>/delete?_method=DELETE"
+                            method="POST" class="editCommentForm" style="display: inline;">
+                            <a href="/<%= user._id %>/post/<%= post._id %>/comment/<%= comment._id %>/edit"
+                                class="">Edit </a>
+                            <button class="">Delete</button>
+                        </form>
+                        <% } %>
+                    </div>
 
+                    <p style="margin-bottom: 2px;"><%= comment.text %></p>
 
-            <%  if(isPostLiked === -1){ %>
-            <form action="/<%= user._id %>/post/<%= post._id %>/like" method="POST" id="likeBtn">
-                <button class="btn btn-secondary">Like</button>
-                <a href="/<%= user._id %>/post/<%= post._id %>/comment/new" class="btn btn-primary">Add Comment</a>
-            </form>
-            <% } else { %>
-            <form action="/<%= user._id %>/post/<%= post._id %>/unlike" method="POST" id="unlikeBtn">
-                <button class="btn btn-secondary">Unlike</button>
-                <a href="/<%= user._id %>/post/<%= post._id %>/comment/new" class="btn btn-primary">Add Comment</a>
-            </form>
-            <% } %>
+                </div>
+                <%}) %>
+            </div>
 
-            <hr style="margin: 2px 0;">
+            <div class="showReactionBtn">
+                <%  if(isPostLiked === -1){ %>
+                <form action="/<%= user._id %>/post/<%= post._id %>/like" method="POST" id="likeBtn">
+                    <a class="showCommentArea"><i class="fas fa-comment fa-2x"></i></a>
+                    <button class=""><i class="far fa-heart fa-2x"></i></button>
+                </form>
+                <% } else { %>
+                <form action="/<%= user._id %>/post/<%= post._id %>/unlike" method="POST" id="unlikeBtn">
+                    <a class="showCommentArea"><i class="fas fa-comment fa-2x"></i></a>
+                    <button class=""><i class="fas fa-heart fa-2x"></i></button>
+                </form>
+                <% } %>
+                <form action="/<%= post.author.id %>/post/<%= post._id %>/comment" method="POST" class="addCommentArea"
+                    style="margin: 2% auto;">
+                    <textarea class="form-control" type="text" name="text" autocomplete="off" placeholder="Comment"
+                        maxlength="140" requiredcols="30" rows="4" style="resize: none;"></textarea>
+                    <button class="btn btn-md btn-primary btn-block">Add Comment</button>
+                </form>
+            </div>
 
-            <% post.comments.forEach(function(comment){ %>
-            <p style="margin-bottom: 2px;"><strong><%= comment.author.username %></strong></p>
-            <p style="margin-bottom: 2px;"><%= comment.text %></p>
-            <% if(currentUser && currentUser._id.equals(comment.author.id)){ %>
-            <form action="/<%= user._id %>/post/<%= post._id %>/comment/<%= comment._id %>/delete?_method=DELETE"
-                method="POST" class="">
-                <a href="/<%= user._id %>/post/<%= post._id %>/comment/<%= comment._id %>/edit"
-                    class="btn btn-info btn-sm">Edit Comment</a>
-                <button class="btn btn-danger btn-sm">Delete</button>
-            </form>
-            <% } %>
-            <%}) %>
         </div>
 
     </div>
