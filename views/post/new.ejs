@@ -3,7 +3,7 @@
 <div class="mainWrapper">
     <h1 class="formTop">New Post</h1>
     <div class="container">
-        <form action="/<%= currentUser._id %>" method="POST">
+        <form action="/<%= user.username %>" method="POST">
             <div class="form-group">
                 <label for="imageurl">Image URL</label>
                 <input class="form-control" type="text" name="imageurl" autocomplete="off" required />

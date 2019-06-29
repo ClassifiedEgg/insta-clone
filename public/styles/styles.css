@@ -160,8 +160,12 @@ body {
   grid-template-columns: 10% 80%;
 }
 
-.postTop p {
+.postTop a {
+  margin: auto 0;
   margin-left: 1%;
+  font-weight: 600;
+  text-decoration: none;
+  color: black;
 }
 
 .postImageContainer {
@@ -180,9 +184,11 @@ body {
   background: #aaefdf;
 }
 
-.postCaption p {
+.postCaption p span a{
   margin-left: 1%;
   margin-top: 3px;
+  text-decoration: none;
+  color: black;
 }
 
 .userPicFrameLanding {
@@ -195,6 +201,7 @@ body {
   margin: auto;
   overflow: hidden;
 }
+
 
 .userPicLanding {
   width: 100%;

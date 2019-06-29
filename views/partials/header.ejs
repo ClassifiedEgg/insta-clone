@@ -56,15 +56,15 @@
                         <li class="nav-item"><a href="/login" class="nav-link text-light" name="login"><i class="fas fa-sign-in-alt fa-lg"></i></a></li>
                         <li class="nav-item"><a href="/register" class="nav-link text-light"><i class="fas fa-user-plus fa-lg"></i></a></li>
                         <% } else { %>
-                        <li class="nav-item"><a href="/<%= currentUser._id %>/new   " class="nav-link text-light"><i
+                        <li class="nav-item"><a href="/<%= currentUser.username %>/new   " class="nav-link text-light"><i
                                     class="fas fa-plus fa-lg"></i></a></li>
                         <li class="nav dropdown">
                             <a class="nav-link dropdown-toggle text-light" data-toggle="dropdown" href="#" role="button"
                                 aria-haspopup="true" aria-expanded="false"><i class="fas fa-user fa-lg"></i></a>
                             <div class="dropdown-menu">
-                                <a href="/<%= currentUser._id %>" class="nav-link text-dark"><span><i class="fas fa-home"></i></span> Home</a>
-                                <a href="/<%= currentUser._id %>/edit" class="nav-link text-dark"><span><i class="fas fa-user-edit"></i></span> Edit Account</a>
-                                <a href="/<%= currentUser._id %>/liked" class="nav-link text-dark"><span><i class="fas fa-heart"></i></span> Liked Posts</a>
+                                <a href="/<%= currentUser.username %>" class="nav-link text-dark"><span><i class="fas fa-home"></i></span> Home</a>
+                                <a href="/<%= currentUser.username %>/edit" class="nav-link text-dark"><span><i class="fas fa-user-edit"></i></span> Edit Account</a>
+                                <a href="/<%= currentUser.username %>/liked" class="nav-link text-dark"><span><i class="fas fa-heart"></i></span> Liked Posts</a>
                             </div>
                         </li>
                         <li class="nav-item"><a href="/logout" class="nav-link text-light fa-lg" style="height: 100%"><i

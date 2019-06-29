@@ -4,7 +4,7 @@ $(document).ready(function() {
   var $likeBtn = $("#likeBtn");
   $likeBtn.submit(function() {
     $.post(
-      $(this).attr("/:id/post/:postid/like"),
+      $(this).attr("/:uName/post/:postid/like"),
       $(this).serialize(),
       function(response) {
       },
@@ -16,7 +16,7 @@ $(document).ready(function() {
   var $unlikeBtn = $("#unlikeBtn");
   $unlikeBtn.submit(function() {
     $.post(
-      $(this).attr("/:id/post/:postid/unlike"),
+      $(this).attr("/:uName/post/:postid/unlike"),
       $(this).serialize(),
       function(response) {
       },
@@ -28,7 +28,7 @@ $(document).ready(function() {
   var $followBtn = $("#followBtn");
   $followBtn.submit(function() {
     $.post(
-      $(this).attr("/:id/follow"),
+      $(this).attr("/:uName/follow"),
       $(this).serialize(),
       function(response) {
       },

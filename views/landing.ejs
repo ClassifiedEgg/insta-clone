@@ -13,16 +13,16 @@
                 <div class="userPicFrameLanding">
                     <img src="<%= user.avatar %>" alt="" class="userPicLanding" class="img-fluid">
                 </div>
-                <p class="userNameLanding"><%= user.username %></p>
+                <a href="/<%= user.username %>"><%= user.username %></a>
             </div>
 
             <div class="postImageContainer">
-                <a href="/<%= post.author.id %>/post/<%= post._id %>"><img src="<%= post.image %>" alt=""
+                <a href="/<%= post.author.username %>/post/<%= post._id %>"><img src="<%= post.image %>" alt=""
                         class="postImage"></a>
             </div>
 
             <div class="postCaption">
-                <p><span><%= user.username %></span> <%= post.caption %></p>
+                <p><span><a href="/<%= user.username %>"><%= user.username %></a></span> <%= post.caption %></p>
             </div>
 
         </div>

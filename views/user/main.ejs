@@ -11,11 +11,11 @@
 
                 <%  if(currentUser && !user._id.equals(currentUser._id)){ %>
                 <%  if(isUserFollowed === -1){ %>
-                <form action="/<%= user._id %>/follow" method="POST" class="form-inline" id="userFollow">
+                <form action="/<%= user.username %>/follow" method="POST" class="form-inline" id="userFollow">
                     <button class="btn btn-primary btn-sm" id="followBtn">Follow <strong>+</strong></button>
                 </form>
                 <% } else { %>
-                <form action="/<%= user._id %>/unfollow" method="POST" class="form-inline" id="userFollow">
+                <form action="/<%= user.username %>/unfollow" method="POST" class="form-inline" id="userFollow">
                     <button class="btn btn-primary btn-sm" id="followBtn">Unfollow</button>
                 </form>
                 <% } %>
@@ -34,13 +34,15 @@
     </div>
     <hr>
     <div class="gallery">
-            <% user.posts.forEach(function(post){ %>
-        <div class="galleryPhotoContainer"><a href="/<%= user._id %>/post/<%= post._id %>"><img src="<%= post.image %>"
-                    alt="" class="galleryPhoto"></a>
+        <% user.posts.forEach(function(post){ %>
+        <div class="galleryPhotoContainer">
+            <a href="/<%= user.username %>/post/<%= post._id %>">
+                <img src="<%= post.image %>" alt="" class="galleryPhoto">
+            </a>
         </div>
         <%}) %>
     </div>
-   
+
 </div>
 
 <% include ../partials/footer.ejs %>

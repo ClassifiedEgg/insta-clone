@@ -3,7 +3,7 @@
 <div class="mainWrapper">
     <h1 class="formTop">Edit User</h1>
     <div class="container">
-        <form action="/<%= user._id %>?_method=PUT" method="POST">
+        <form action="/<%= user.username %>?_method=PUT" method="POST">
             <div class="form-group">
                 <label for="username">User Name</label>
                 <input class="form-control" type="text" name="username" autocomplete="off"  value="<%= user.username %>" readonly />
@@ -28,7 +28,7 @@
                 <button class="btn btn-md btn-primary btn-block">Confirm Changes</button>
             </div>
             <hr>
-            <a href="/<%= currentUser._id %>">Back</a>
+            <a href="/<%= user.username %>">Back</a>
         </form>
     </div>
 </div>
