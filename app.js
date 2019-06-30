@@ -96,6 +96,20 @@ app.get("/logout", isLoggedIn, function(req, res) {
   res.redirect("/");
 });
 
+//========================= SEARCH ROUTE =========================
+app.get("/search", function(req, res) {
+  var nameRegex = new RegExp(req.query.search);
+  User.find({ username: {$regex: nameRegex, $options: 'i'} }, function(err, foundUsers) {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(req.query.search + " ============");
+      console.log(foundUsers + " ++++++++++ ");
+      res.render("search/users", {foundUsers: foundUsers});
+    }
+  });
+});
+
 //========================= MAIN USER PAGE =========================
 // app.get("/:id", function(req, res) {
 //   User.findById(req.params.id)

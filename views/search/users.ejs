@@ -1,0 +1,31 @@
+<% include ../partials/header.ejs %>
+
+<div class="mainWrapper">
+    <div class="formTop">
+        <h1>Search Results</h1>
+    </div>
+    <% foundUsers.forEach(function(user){ %>
+    <div class="searchUser">
+        <div class="searchUserPicContainer">
+            <a href="/<%= user.username %>">
+                <img src="<%= user.avatar %>" alt="" class="searchUserPic">
+            </a>
+        </div>
+        <div class="searchUserDetails">
+            <div class="searchUserName">
+                <span> <a href="/<%= user.username %>"><%= user.username %></a> </span>
+            </div>
+            <div class="searchUserDetailsDiv">
+                <span>
+                    <span class="">Posts <%= user.posts.length %></span> <span class="">Followers
+                        <%= user.followers.length %></span> <span class="">Following <%= user.following.length %></span>
+                </span>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <% }) %>
+
+</div>
+
+<% include ../partials/footer.ejs %>

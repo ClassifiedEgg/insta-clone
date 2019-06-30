@@ -184,7 +184,7 @@ body {
   background: #aaefdf;
 }
 
-.postCaption p span a{
+.postCaption p span a {
   margin-left: 1%;
   margin-top: 3px;
   text-decoration: none;
@@ -201,7 +201,6 @@ body {
   margin: auto;
   overflow: hidden;
 }
-
 
 .userPicLanding {
   width: 100%;
@@ -294,15 +293,15 @@ body {
   margin-top: 1%;
 }
 
-.showReactionBtn form button{
+.showReactionBtn form button {
   color: red;
 }
 
-.showReactionBtn form a{
+.showReactionBtn form a {
   color: black;
 }
 
-.showReactionBtn button{
+.showReactionBtn button {
   border: none;
   background: none;
 }
@@ -319,4 +318,55 @@ body {
 .showCommentArea {
   text-decoration: none;
   cursor: pointer;
+}
+
+.searchUser {
+  display: grid;
+  grid-template-columns: 15% 80%;
+  margin-top: 1%;
+  height: 80px;
+}
+
+.searchUserPicContainer {
+  max-width: 100%;
+  max-height: 100%;
+  display: flex;
+  justify-items: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.searchUserPicContainer a {
+  max-width: 90%;
+  max-height: 90%;
+  margin: auto;
+  display: flex;
+  justify-items: center;
+}
+
+.searchUserPic {
+  max-width: 70%;
+  max-height: 70%;
+  margin: 0 auto;
+}
+
+.searchUserDetails {
+  display: grid;
+  grid-template-rows: 50% 50%;
+  border-left: 1px solid grey;
+}
+
+.searchUserDetails div {
+  align-self: center;
+  margin-left: 3%;
+}
+
+.searchUserName span a{
+  font-weight: bold;
+  color: black;
+  text-decoration: none;
+}
+
+.searchUserDetailsDiv span span {
+  margin-right: 3%;
 }
