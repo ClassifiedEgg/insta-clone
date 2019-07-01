@@ -20,7 +20,9 @@
                 <% } %>
             </div>
 
-            <div class="showComments" style="max-height: 100%;">
+            <hr>
+
+            <div class="showComments">
                 <% post.comments.forEach(function(comment){ %>
                 <div class="showEachComment">
                     <div class="showEachCommentTop">
@@ -41,6 +43,8 @@
                 </div>
                 <%}) %>
             </div>
+            
+            <hr>
 
             <div class="showReactionBtn">
                 <%  if(isPostLiked === -1){ %>
@@ -56,8 +60,8 @@
                 <% } %>
                 <form action="/<%= post.author.username %>/post/<%= post._id %>/comment" method="POST" class="addCommentArea"
                     style="margin: 2% auto;">
-                    <textarea class="form-control" type="text" name="text" autocomplete="off" placeholder="Comment"
-                        maxlength="140" requiredcols="30" rows="4" style="resize: none;"></textarea>
+                    <input class="form-control" type="text" name="text" autocomplete="off" placeholder="Comment"
+                        maxlength="140"/>
                     <button class="btn btn-md btn-primary btn-block">Add Comment</button>
                 </form>
             </div>

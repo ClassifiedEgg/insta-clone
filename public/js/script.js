@@ -38,7 +38,11 @@ $(document).ready(function() {
   });
 
   document.querySelector(".showCommentArea").addEventListener("click", function(){
-    document.querySelector(".addCommentArea").style.display = "block";
+    if(document.querySelector(".addCommentArea").style.display === "none"){
+      document.querySelector(".addCommentArea").style.display = "block"
+    } else {
+      document.querySelector(".addCommentArea").style.display = "none"
+    }
   });
 
 });

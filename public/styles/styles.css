@@ -110,12 +110,10 @@ body {
 .post {
   display: grid;
   grid-template-columns: 6fr 2fr;
-  border: 1px solid black;
 }
 
 .showPost {
   grid-column: 1 / 2;
-  border: 1px solid bredlack;
 }
 
 #displayPost {
@@ -128,8 +126,7 @@ body {
 .showOther {
   grid-column: 2 / 3;
   margin-left: 1%;
-  display: grid;
-  grid-template-rows: 20% 60% 20%;
+  max-height: 100%;
 }
 
 .dropdown-toggle::after {
@@ -244,9 +241,9 @@ body {
 }
 
 .showComments {
-  border-top: 1px solid black;
-  border-bottom: 1px solid black;
   margin: 0 2px;
+  max-height: 55%;
+  overflow: scroll;
 }
 
 .showEachCommentTop {
@@ -318,6 +315,7 @@ body {
 .showCommentArea {
   text-decoration: none;
   cursor: pointer;
+  min-height: 115px;
 }
 
 .searchUser {
