@@ -63,6 +63,7 @@ app.post("/register", function(req, res) {
     firstName: req.body.firstName,
     lastName: req.body.lastName,
     email: req.body.email,
+    gender: req.body.gender,
     avatar: req.body.avatar
   });
   User.register(newUser, req.body.password, function(err, user) {
@@ -275,6 +276,7 @@ app.put("/:uName", isLoggedIn, function(req, res) {
     firstName: req.body.firstName,
     lastName: req.body.lastName,
     email: req.body.email,
+    gender: req.body.gender,
     avatar: req.body.avatar
   };
   User.findOneAndUpdate(

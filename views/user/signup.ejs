@@ -6,23 +6,36 @@
         <form action="/register" method="POST">
             <div class="form-group">
                 <label for="username">User Name</label>
-                <input class="form-control" type="text" name="username" autocomplete="off" placeholder="Username" required />
+                <input class="form-control" type="text" name="username" autocomplete="off" placeholder="Username"
+                    required />
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
-                <input class="form-control" type="password" name="password" autocomplete="off" placeholder="Password" required />
+                <input class="form-control" type="password" name="password" autocomplete="off" placeholder="Password"
+                    required />
             </div>
             <div class="form-group">
                 <label for="firstName">First Name</label>
-                <input class="form-control" type="text" name="firstName" autocomplete="off" placeholder="First Name" required />
+                <input class="form-control" type="text" name="firstName" autocomplete="off" placeholder="First Name"
+                    required />
             </div>
             <div class="form-group">
                 <label for="lastName">Last Name</label>
-                <input class="form-control" type="text" name="lastName" autocomplete="off" placeholder="Last Name" required />
+                <input class="form-control" type="text" name="lastName" autocomplete="off" placeholder="Last Name"
+                    required />
             </div>
             <div class="form-group">
                 <label for="email">Email</label>
                 <input class="form-control" type="email" name="email" autocomplete="off" placeholder="Email" required />
+            </div>
+            <div class="form-group">
+                <label for="gender">Gender</label>
+                <select name="gender" class="form-control" autocomplete="off" required>
+                    <option value="" disabled selected class="text-disabled">Gender</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                </select>
             </div>
             <div class="form-group">
                 <label for="avatar">Profile Photo</label>

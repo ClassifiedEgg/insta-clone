@@ -7,6 +7,7 @@ var UserSchema = new mongoose.Schema({
   avatar: String,
   firstName: String,
   lastName: String,
+  gender: String,
   email: { type: String, unique: true, required: true },
   posts: [
     {
