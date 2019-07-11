@@ -44,20 +44,55 @@ $(document).ready(function() {
       }
     });
 
-  function reduceNavbar() {
-    if (
-      document.body.scrollTop > 80 ||
-      document.documentElement.scrollTo > 80
-    ) {
-      document.querySelector("nav").style.padding = "30xp 10px";
-      document.querySelector("#logo").style.fontSize = "3rem";
-    } else {
-      document.querySelector("nav").style.padding = "80xp 10px";
-      document.querySelector("#logo").style.fontSize = "4rem";
-    }
-  }
-
-  window.onscroll = function() {
-    reduceNavbar();
-  };
 });
+
+function hideForm(form) {
+  form.style.visibility = "hidden";
+  form.style.opacity = "0";
+  form.style.transition = "opacity 500ms, visibility 500ms";
+  $(form)
+    .addClass("animated fadeOutUp")
+    .one(
+      "webkitAnimatedEnd mozAnimationEnd MSAnimationEnd onanimationend animationend",
+      function() {
+        $(this).removeClass("animated fadeOutUp");
+      }
+    );
+}
+function showForm(form) {
+  form.style.visibility = "visible";
+  form.style.opacity = "1";
+  form.style.transition = "opacity 500ms, visibility 500ms";
+  $(form)
+    .addClass("animated fadeInDown")
+    .one(
+      "webkitAnimatedEnd mozAnimationEnd MSAnimationEnd onanimationend animationend",
+      function() {
+        $(this).removeClass("animated fadeInDown");
+      }
+    );
+}
+function displayToggle() {
+  let formLogin = document.querySelector(".formLogin").parentElement;
+  let formSignup = document.querySelector(".formSignup").parentElement;
+  if (formLogin.style.visibility === "visible") {
+    // formLogin.style.visibility = "hidden";
+    // formLogin.style.opacity = "0";
+    hideForm(formLogin);
+    showForm(formSignup);
+
+    // formSignup.style.visibility = "visible";
+    // formSignup.style.opacity = "1";
+    // formSignup.style.transition = "opacity 500ms, visibility 500ms";
+  } else {
+    // formLogin.style.visibility = "visible";
+    // formLogin.style.opacity = "1";
+    // formLogin.style.transition = "opacity 500ms, visibility 500ms";
+
+    hideForm(formSignup);
+    showForm(formLogin);
+
+    // formSignup.style.visibility = "hidden";
+    // formSignup.style.opacity = "0";
+  }
+}

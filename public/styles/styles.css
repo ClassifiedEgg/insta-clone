@@ -368,3 +368,44 @@ body {
 .searchUserDetailsDiv span span {
   margin-right: 3%;
 }
+
+.formWrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-top: 0.1rem;
+}
+
+.formContainer:first-child {
+  background-image: url(./simone-hutsch-atNQHTffUUo-unsplash.jpg);
+  background-size: cover; /* <------ */
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.formContainer:last-child {
+  background-image: url(./henry-co-tax7ZBqi3ak-unsplash.jpg);
+  background-size: cover; /* <------ */
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.formLoginContainer {
+  background-color: #f6f4f3;
+  padding: 9% 5%;
+  height: 100%;
+}
+
+.formSignupContainer {
+  background-color: #f6f4f3;
+  padding: 9% 5%;
+  height: 100%;
+}
+
+.toggleBtn {
+  color: blue;
+}
+
+.toggleBtn:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}

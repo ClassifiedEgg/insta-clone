@@ -53,7 +53,7 @@ app.get("/", isLoggedIn, function(req, res) {
 
 //========================= SIGNUP PAGE =========================
 app.get("/register", function(req, res) {
-  res.render("user/signup");
+  res.render("user/login", {fromLogin: 0});
   console.log(req.body.user);
 });
 
@@ -79,7 +79,7 @@ app.post("/register", function(req, res) {
 
 //========================= LOGIN PAGE =========================
 app.get("/login", function(req, res) {
-  res.render("user/login");
+  res.render("user/login", {fromLogin: 1});
 });
 
 app.post(
