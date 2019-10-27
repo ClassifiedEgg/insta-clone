@@ -53,7 +53,7 @@ app.get("/", isLoggedIn, function(req, res) {
 
 //========================= SIGNUP PAGE =========================
 app.get("/register", function(req, res) {
-  res.render("user/login", {fromLogin: 0});
+  res.render("user/login", { fromLogin: 0 });
   console.log(req.body.user);
 });
 
@@ -79,13 +79,13 @@ app.post("/register", function(req, res) {
 
 //========================= LOGIN PAGE =========================
 app.get("/login", function(req, res) {
-  res.render("user/login", {fromLogin: 1});
+  res.render("user/login", { fromLogin: 1 });
 });
 
 app.post(
   "/login",
   passport.authenticate("local", {
-    successRedirect: "/",
+    successRedirect: "/secret",
     failureRedirect: "/login"
   }),
   function(req, res) {}
@@ -100,13 +100,16 @@ app.get("/logout", isLoggedIn, function(req, res) {
 //========================= SEARCH ROUTE =========================
 app.get("/search", function(req, res) {
   var nameRegex = new RegExp(req.query.search);
-  User.find({ username: {$regex: nameRegex, $options: 'i'} }, function(err, foundUsers) {
+  User.find({ username: { $regex: nameRegex, $options: "i" } }, function(
+    err,
+    foundUsers
+  ) {
     if (err) {
       console.log(err);
     } else {
       console.log(req.query.search + " ============");
       console.log(foundUsers + " ++++++++++ ");
-      res.render("search/users", {foundUsers: foundUsers});
+      res.render("search/users", { foundUsers: foundUsers });
     }
   });
 });
@@ -240,7 +243,7 @@ app.get("/:uName/new", isLoggedIn, function(req, res) {
 //   });
 // });
 
-app.get("/:uName/edit", isLoggedIn, function(req, res) {
+app.get("/:uName/edit", isUserOwner, function(req, res) {
   User.findOne({ username: req.params.uName }, function(err, foundUser) {
     if (err) {
       res.redirect("back");
@@ -270,7 +273,7 @@ app.get("/:uName/edit", isLoggedIn, function(req, res) {
 //   });
 // });
 
-app.put("/:uName", isLoggedIn, function(req, res) {
+app.put("/:uName", isUserOwner, function(req, res) {
   var updatedUser = {
     username: req.body.username,
     firstName: req.body.firstName,
@@ -804,15 +807,17 @@ function isLoggedIn(req, res, next) {
   }
 }
 
-function isUser(req, res, next) {
+function isUserOwner(req, res, next) {
   if (req.isAuthenticated()) {
-    User.findById(req.params.uName, function(err, foundUser) {
+    User.findOne({ username: req.params.uName }, function(err, foundUser) {
       if (err) {
+        console.log(err);
         res.redirect("back");
       } else {
-        if (foundUser._id.equals(req.user._id)) {
+        if (req.params.uName === req.user.username) {
           next();
         } else {
+          console.log(err);
           res.redirect("back");
         }
       }
@@ -828,7 +833,7 @@ function isUserOwnerOfPost(req, res, next) {
       if (err) {
         res.redirect("back");
       } else {
-        if (foundPost.author.username.equals(req.user.username)) {
+        if (foundPost.author.username === req.user.username) {
           next();
         } else {
           res.redirect("back");
